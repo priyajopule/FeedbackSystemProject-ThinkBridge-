@@ -1,10 +1,13 @@
 ﻿using FeedbackSystem.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace FeedbackSystem
 {
     public class FeedbackSysContext : DbContext
     {
+        internal IEnumerable<object> login;
+
         public FeedbackSysContext(DbContextOptions options) : base(options) { }
 
         DbSet<Product> Products
@@ -23,6 +26,12 @@ namespace FeedbackSystem
             set;
         }
         DbSet<Transaction> Transactions
+        {
+            get;
+            set;
+        }
+
+        DbSet<User> Users
         {
             get;
             set;

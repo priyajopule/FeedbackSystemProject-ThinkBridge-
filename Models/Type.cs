@@ -2,7 +2,7 @@
 {
     public enum Type
     {
-        Rating,
-        Comments
+       Rating,
+       Comments
     }
 }

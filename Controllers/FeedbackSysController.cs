@@ -22,37 +22,63 @@ namespace FeedbackSystem.Controllers
 
         [Route("products")]
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
             var response = await _feedbackSysService.GetProducts();
-            return response;
+            return Ok(response);
         }
 
-        
-
-        // GET api/<FeedbackSysController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("questions")]
+        public async Task<IActionResult> GetQuestions()
         {
-            return "value";
+            var response = await _feedbackSysService.GetQuestions();
+            return Ok(response);
         }
 
-        // POST api/<FeedbackSysController>
+        [HttpGet]
+        [Route("login")]
+
+        public async Task<IActionResult> GetLogin([FromBody] User user)
+        {
+            bool isValid = await _feedbackSysService.GetLogin(user);
+            if (isValid)
+                return Ok("User logged in successfully");
+            return Ok("Invalid userId or password");
+        }
+
+        [HttpGet]
+        [Route("usersurvey")]
+        public async Task<IActionResult> GetUserSurvey()
+        {
+            var response = await _feedbackSysService.GetUserSurvey();
+            return Ok(response);
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("survey")]
+
+        public async Task<IActionResult> AddUserSurvey(SurveyModel addSurveyRequest)
         {
+            await _feedbackSysService.AddUserSurvey(addSurveyRequest);
+            return Ok();
+
         }
 
-        // PUT api/<FeedbackSysController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet]
+        [Route("survey")]
+        public async Task<IActionResult> GetSurveyById([FromQuery] int id)
         {
+            var response = await _feedbackSysService.GetSurveyById(id);
+            return Ok(response);
         }
 
-        // DELETE api/<FeedbackSysController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet]
+        [Route("deletSurvey")]
+        public async Task<IActionResult> DeleteSurvey([FromQuery] int id)
         {
+            var response = await _feedbackSysService.DeleteSurvey(id);
+            return Ok(response);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace FeedbackSystem.Models
 {
-    public class Transaction
+   /* public class Transaction
     {
         [Key]
         public int Tid { get; set; }
@@ -15,7 +15,20 @@ namespace FeedbackSystem.Models
         public string Answer { get; set; }
 
         public Type Type { get; set; }
+    }*/
 
+    public class Transaction
+    {
+        [Key]
+        public int Tid { get; set; }
+        public int ProductID { get; set; }
 
+        public int SurveyID { get; set; }
+
+        public int QuestionID { get; set; }
+
+        public string Answer { get; set; }
+
+        public string Type { get; set; }
     }
 }
