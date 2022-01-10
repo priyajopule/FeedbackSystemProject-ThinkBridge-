@@ -17,6 +17,9 @@ namespace FeedbackSystem.Models
         public Type Type { get; set; }
     }*/
 
+    /// <summary>
+    /// transaction table model
+    /// </summary>
     public class Transaction
     {
         [Key]
@@ -29,6 +32,6 @@ namespace FeedbackSystem.Models
 
         public string Answer { get; set; }
 
-        public string Type { get; set; }
+        public Type Type { get; set; }
     }
 }

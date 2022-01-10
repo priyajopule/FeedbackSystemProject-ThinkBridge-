@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FeedbackSystem.Models
 {
+    /// <summary>
+    /// Servey table model with transaction list
+    /// </summary>
     public class Survey
     {
         [Key]

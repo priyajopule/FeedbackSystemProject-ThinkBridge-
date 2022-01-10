@@ -1,6 +1,7 @@
 ﻿using FeedbackSystem.Interface;
 using FeedbackSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,68 +18,160 @@ namespace FeedbackSystem.Controllers
         {
             _feedbackSysService = feedbackSysService;
         }
+        
+        
         // GET: api/<FeedbackSysController>
+        /// <summary>
+        ///-------- GET ALL PRODUCTS-------- 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-
         [Route("products")]
 
         public async Task<IActionResult> GetProducts()
         {
-            var response = await _feedbackSysService.GetProducts();
-            return Ok(response);
+            try
+            {
+                var response = await _feedbackSysService.GetProducts();
+                return Ok(response);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
+
+        /// <summary>
+        /// -------GET ALL QUESTIONS-------
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("questions")]
         public async Task<IActionResult> GetQuestions()
         {
-            var response = await _feedbackSysService.GetQuestions();
-            return Ok(response);
+            try
+            {
+                var response = await _feedbackSysService.GetQuestions();
+                return Ok(response);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
+
+        /// <summary>
+        /// -------GET LOGIN BY ADMIN USER------
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("login")]
 
         public async Task<IActionResult> GetLogin([FromBody] User user)
         {
-            bool isValid = await _feedbackSysService.GetLogin(user);
-            if (isValid)
-                return Ok("User logged in successfully");
-            return Ok("Invalid userId or password");
+            try
+            {
+                bool isValid = await _feedbackSysService.GetLogin(user);
+                if (isValid)
+                    return Ok("User logged in successfully");
+                return Ok("Invalid userId or password");
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
+
+
+        /// <summary>
+        /// -------GET USERS SURVEY-------
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("usersurvey")]
         public async Task<IActionResult> GetUserSurvey()
         {
-            var response = await _feedbackSysService.GetUserSurvey();
-            return Ok(response);
+            try
+            {
+                var response = await _feedbackSysService.GetUserSurvey();
+                return Ok(response);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
+
+
+        /// <summary>
+        /// ---------ADD USER SURVEY--------------
+        /// </summary>
+        /// <param name="addSurveyRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("survey")]
 
         public async Task<IActionResult> AddUserSurvey(SurveyModel addSurveyRequest)
         {
-            await _feedbackSysService.AddUserSurvey(addSurveyRequest);
-            return Ok();
-
+            try
+            {
+                await _feedbackSysService.AddUserSurvey(addSurveyRequest);
+                return Ok();
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
+
+
+        /// <summary>
+        /// -------------GET SERVEY BY PRODUCT ID------------------
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         [HttpGet]
         [Route("survey")]
         public async Task<IActionResult> GetSurveyById([FromQuery] int id)
         {
-            var response = await _feedbackSysService.GetSurveyById(id);
-            return Ok(response);
+            try
+            {
+                var response = await _feedbackSysService.GetSurveyById(id);
+                return Ok(response);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
-        [HttpGet]
+
+
+        /// <summary>
+        /// ---------DELETE SURVEY BY SURVEY ID--------------
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
         [Route("deletSurvey")]
         public async Task<IActionResult> DeleteSurvey([FromQuery] int id)
         {
-            var response = await _feedbackSysService.DeleteSurvey(id);
-            return Ok(response);
+            try
+            {
+                var response = await _feedbackSysService.DeleteSurvey(id);
+                return Ok(response);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

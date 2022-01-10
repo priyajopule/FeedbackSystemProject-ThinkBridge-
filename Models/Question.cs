@@ -2,6 +2,9 @@
 
 namespace FeedbackSystem.Models
 {
+    /// <summary>
+    /// master table for Questions
+    /// </summary>
     public class Question
     {
         [Key]
@@ -12,3 +15,4 @@ namespace FeedbackSystem.Models
         public Type QType { get; set; }
     }
 }
+
